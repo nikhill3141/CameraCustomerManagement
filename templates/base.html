@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Dashboard{% endblock title %}</title>
+
+    <!-- Tailwind & Flowbite -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.css" rel="stylesheet" />
+
+    <!-- tom -->
+    <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script>
+
+  </head>
+
+  <body class="bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-white">
+    <div class="flex min-h-screen">
+
+      <!-- Sidebar -->
+      <aside id="default-sidebar"
+        class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0 bg-white dark:bg-gray-800 shadow-lg"
+        aria-label="Sidebar">
+        <div class="flex items-center justify-between p-4 sm:hidden">
+          <h1 class="text-xl font-bold text-blue-700 dark:text-blue-400">One Click 2.0</h1>
+          <button data-drawer-hide="default-sidebar" aria-controls="default-sidebar"
+            class="text-gray-600 dark:text-gray-300 hover:text-red-600 dark:hover:text-red-400">
+            ✕
+          </button>
+        </div>
+        <div class="h-full px-4 py-6 overflow-y-auto">
+          <h1 class="hidden sm:block text-2xl font-extrabold mb-4 text-blue-800 dark:text-blue-400">One Click 2.0</h1>
+          <ul class="space-y-3 font-medium">
+            <li>
+              <a href="{% url 'dashboard' %}" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                🧩 <span>WorkSpace</span>
+                <span class="ml-auto text-xs bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300 px-2 py-0.5 rounded">Pro</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'add_template' %}" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                ➕ <span>Add</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'all_customer' %}" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                🔍 <span>Search Database</span>
+              </a>
+            </li>
+            <li>
+              <a href="{% url 'logout' %}" class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700">
+                🚪 <span>Logout</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <!-- Mobile Toggle Button -->
+      <button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar"
+        type="button"
+        class="fixed top-3 left-3 z-50 inline-flex items-center p-2 text-sm text-gray-600 rounded-lg bg-white shadow-md sm:hidden hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-300 dark:hover:bg-gray-700">
+        <span class="sr-only">Toggle sidebar</span>
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round"
+            d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+
+      <!-- Main Content -->
+      <div class="flex-1 sm:ml-64 p-4 sm:p-6">
+        <main>
+          {% block content %}
+          {% endblock content %}
+        </main>
+      </div>
+
+    </div>
+
+    <!-- Flowbite -->
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+
+    <!-- Tom Select -->
+ <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        new TomSelect('#cameramen', {
+          plugins: ['remove_button'],
+          maxItems: null,
+          placeholder: 'Select Cameramen',
+        });
+      });
+    </script> 
+
+    
+  </body>
+</html>

@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4 py-10">
+  <form class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 space-y-8" method="POST">
+    {% csrf_token %}
+
+    <h2 class="text-3xl font-extrabold text-center text-gray-800 dark:text-white">Add New Exposing</h2>
+
+    <!-- Event Name -->
+    <div>
+      <label for="event_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Event Name</label>
+      <input type="text" name="eventName" id="event_name" autocomplete="off"
+        class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+    </div>
+
+    <!-- Price -->
+    <div>
+      <label for="price" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Price</label>
+      <input type="number" name="price" id="price" autocomplete="off"
+        class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+    </div>
+
+    <!-- Description -->
+    <div>
+      <label for="event_description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Description</label>
+      <input type="text" name="eventDescription" id="event_description" autocomplete="off"
+        class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+    </div>
+
+    <!-- Location -->
+    <div>
+      <label for="location" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Location</label>
+      <textarea name="location" id="location" rows="3" autocomplete="off"
+        class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none"></textarea>
+    </div>
+
+    <!-- Date and Cameramen -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Date</label>
+        <input type="date" name="date" id="date" autocomplete="off"
+          class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+      </div>
+
+      <!-- Cameramen Multi-Select -->
+      <div>
+        <label for="cameramen" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Select Cameramen</label>
+        <select id="cameramen" name="cameramens" multiple autocomplete="off"
+          class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3">
+          {% for cameraman in cameramens %}
+            <option value="{{ cameraman.id }}">{{ cameraman.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="text-center pt-4">
+      <button type="submit"
+        class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-6 rounded-lg shadow-sm transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        Add Event
+      </button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+

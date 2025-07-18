@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block content %}
+
+<!-- Floating Add Customer Button -->
+<a
+  href="{% url 'add_template' %}"
+  id="floating-button"
+  class="fixed z-40 bottom-6 right-6 bg-blue-600 text-white text-3xl font-bold px-5 py-3 rounded-full shadow-lg hover:bg-blue-700 transition"
+>
+  +
+</a>
+
+<!-- Dashboard Content -->
+<div class="container mx-auto mt-4 px-4 pb-24">
+  <!-- Welcome Message -->
+  <h2 class="text-2xl sm:text-3xl font-semibold mb-6 text-gray-800 dark:text-white text-center sm:text-left mt-2 sm:mt-0">
+    Welcome, {{ user.username }} 👋
+  </h2>
+
+  <!-- Summary Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
+    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-5 text-center">
+      <h5 class="text-sm text-gray-500 dark:text-gray-300 mb-1">Total Customers</h5>
+      <h2 class="text-3xl font-bold text-gray-800 dark:text-white">{{ total_customers }}</h2>
+    </div>
+    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-5 text-center">
+      <h5 class="text-sm text-gray-500 dark:text-gray-300 mb-1">Total Exposing</h5>
+      <h2 class="text-3xl font-bold text-gray-800 dark:text-white">{{ total_events }}</h2>
+    </div>
+    <div class="bg-white dark:bg-gray-800 shadow-md rounded-lg p-5 text-center">
+      <h5 class="text-sm text-gray-500 dark:text-gray-300 mb-1">Pending Payments</h5>
+      <h2 class="text-3xl font-bold text-red-600 dark:text-red-400">₹ {{ total_pending }}</h2>
+    </div>
+  </div>
+
+  <!-- Pending Customers Table -->
+  <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-2 gap-3">
+    <h3 class="text-xl font-semibold text-gray-800 dark:text-white">📋 Pending Money - Customer List</h3>
+    <a href="{% url 'export_pending_customers' %}"
+       class="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition">
+      ⬇ Export CSV
+    </a>
+  </div>
+
+  <div class="overflow-x-auto mb-6">
+    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
+      <thead class="text-xs uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-300">
+        <tr>
+          <th class="px-4 py-2">Name</th>
+          <th class="px-4 py-2">Phone</th>
+          <th class="px-4 py-2">Pending Amount</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for customer in pending_customers %}
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <td class="px-4 py-2">{{ customer.full_name }}</td>
+          <td class="px-4 py-2">{{ customer.mobile_no }}</td>
+          <td class="px-4 py-2">₹ {{ customer.pending_amount }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3" class="px-4 py-2 text-center">No pending payments</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Upcoming Events Table -->
+  <h3 class="text-xl font-semibold text-gray-800 dark:text-white mb-2">📅 Upcoming Exposings</h3>
+  <div class="overflow-x-auto">
+    <table class="w-full text-sm text-left text-gray-700 dark:text-gray-200">
+      <thead class="text-xs uppercase bg-gray-200 dark:bg-gray-700 dark:text-gray-300">
+        <tr>
+          <th class="px-4 py-2">Title</th>
+          <th class="px-4 py-2">Date</th>
+          <th class="px-4 py-2">Cameraman</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for event in upcoming_events %}
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+          <td class="px-4 py-2">{{ event.event_name }}</td>
+          <td class="px-4 py-2">{{ event.event_date }}</td>
+          <td class="px-4 py-2">{{ event.name}}</td>
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="3" class="px-4 py-2 text-center">No upcoming events</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Hide Floating Button When Sidebar Is Open (Mobile) -->
+<script>
+  const floatingBtn = document.getElementById('floating-button');
+  const sidebar = document.getElementById('mobile-sidebar'); // Make sure your sidebar has this ID
+
+  if (sidebar && floatingBtn) {
+    const observer = new MutationObserver(() => {
+      const isVisible = window.getComputedStyle(sidebar).display !== 'none';
+      if (isVisible) {
+        floatingBtn.classList.add('hidden');
+      } else {
+        floatingBtn.classList.remove('hidden');
+      }
+    });
+
+    observer.observe(sidebar, { attributes: true, childList: true, subtree: true });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 768) {
+        floatingBtn.classList.remove('hidden');
+      }
+    });
+  }
+</script>
+
+{% endblock %}

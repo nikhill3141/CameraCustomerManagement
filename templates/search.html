@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto mt-10 px-4 sm:px-6 lg:px-8">
+  <!-- Tabs Header -->
+  <ul class="flex flex-wrap text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:border-gray-700 dark:text-gray-400">
+    <li class="me-2">
+      <a href="{% url 'all_customer' %}" class="inline-block p-4 rounded-t-lg {% if active_tab == 'customers' %}text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500{% else %}hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300{% endif %}">
+        Customers
+      </a>
+    </li>
+    <li class="me-2">
+      <a href="{% url "all_event" %}" class="inline-block p-4 rounded-t-lg {% if active_tab == 'events' %}text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500{% else %}hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300{% endif %}">
+        Events
+      </a>
+    </li>
+    <li class="me-2">
+      <a href="{% url "all_cameramens" %}" class="inline-block p-4 rounded-t-lg {% if active_tab == 'cameramen' %}text-blue-600 bg-gray-100 active dark:bg-gray-800 dark:text-blue-500{% else %}hover:text-gray-600 hover:bg-gray-50 dark:hover:bg-gray-800 dark:hover:text-gray-300{% endif %}">
+        Cameramen
+      </a>
+    </li>
+  </ul>
+
+  <!-- Content Area -->
+  <div class="mt-6">
+    {% block tab_content %}{% endblock tab_content %}
+  </div>
+</div>
+{% endblock content %}

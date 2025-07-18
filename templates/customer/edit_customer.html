@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-100 dark:bg-gray-900 px-4 py-10">
+  <form class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-xl shadow-xl p-8 space-y-8" method="POST">
+    {% csrf_token %}
+
+    <h2 class="text-3xl font-extrabold text-center text-gray-800 dark:text-white">Edit Customer</h2>
+
+    <!-- Full Name -->
+    <div>
+      <label for="full_name" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Full Name</label>
+      <input type="text" name="full_name" id="full_name" value="{{ customer.full_name }}" autocomplete="off" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+    </div>
+
+    <!-- Mobile Number -->
+    <div>
+      <label for="mobile_number" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Mobile Number</label>
+      <input type="tel" name="mobile_number" id="mobile_number" value="{{ customer.mobile_no }}" autocomplete="off" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+    </div>
+
+    <!-- Address -->
+    <div>
+      <label for="address" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Address</label>
+      <textarea name="address" id="address" rows="3" autocomplete="off" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none" required>{{ customer.address }}</textarea>
+    </div>
+
+    <!-- Order Type & Description -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="order_type" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Order Type</label>
+        <input type="text" name="order_type" id="order_type" value="{{ customer.order_type }}" autocomplete="off" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+      </div>
+      <div>
+        <label for="order_description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Order Description</label>
+        <input type="text" name="order_description" id="order_description" value="{{ customer.order_description }}" autocomplete="off" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+      </div>
+    </div>
+
+    <!-- Total & Paid Price -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label for="total_price" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Total Price</label>
+        <input type="number" name="total_price" id="total_price" value="{{ customer.total_price }}" autocomplete="off" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+      </div>
+      <div>
+        <label for="paid_price" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Paid Price</label>
+        <input type="number" name="paid_price" id="paid_price" value="{{ customer.paid_price }}" autocomplete="off" class="block w-full rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-700 text-gray-900 dark:text-white p-3 focus:ring-2 focus:ring-blue-500 focus:outline-none" required />
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="pt-4 text-center">
+      <button type="submit" class="inline-block bg-blue-700 hover:bg-blue-800 text-white font-semibold py-2 px-6 rounded-lg shadow-sm transition duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500">Save Changes</button>
+    </div>
+  </form>
+</div>
+{% endblock content %}

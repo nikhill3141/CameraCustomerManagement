@@ -1,0 +1,14 @@
+we have to make the order, cameramen and events management project which will be have 3 forms 
+Forms - 1.adding the details of customer
+2. for adding the events
+3. for the cameramen
+
+User Login 
+-cameramen named as user will be login 
+-regiseter as the User
+
+
+Models 
+- for the customers
+-for the events
+-for the cameramens

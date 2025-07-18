@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
+  <form class="w-full max-w-2xl bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 space-y-6" method="POST">
+    {% csrf_token %}
+
+    <h2 class="text-2xl font-bold text-center text-gray-900 dark:text-white">Add New Cameraman</h2>
+
+    <!--Name -->
+    <div class="relative z-0 w-full group">
+      <input type="text" name="name" id="name"
+        class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent py-2.5 px-0 text-sm text-gray-900 dark:text-white dark:border-gray-600 focus:border-blue-600 focus:outline-none focus:ring-0"
+        placeholder=" " required />
+      <label for="name"
+        class="absolute top-3 -z-10 origin-[0] scale-75 transform text-sm text-gray-500 dark:text-gray-400 transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 dark:peer-focus:text-blue-500">
+         Name
+      </label>
+    </div>
+
+    <!-- Mobile Number -->
+    <div class="relative z-0 w-full group">
+      <input type="tel" name="mobile" id="mobile_number"
+        class="peer block w-full appearance-none border-0 border-b-2 border-gray-300 bg-transparent py-2.5 px-0 text-sm text-gray-900 dark:text-white dark:border-gray-600 focus:border-blue-600 focus:outline-none focus:ring-0"
+        placeholder=" " required />
+      <label for="mobile_number"
+        class="absolute top-3 -z-10 origin-[0] scale-75 transform text-sm text-gray-500 dark:text-gray-400 transition-all peer-placeholder-shown:translate-y-0 peer-placeholder-shown:scale-100 peer-focus:-translate-y-6 peer-focus:scale-75 peer-focus:text-blue-600 dark:peer-focus:text-blue-500">
+        Mobile No
+      </label>
+    </div>
+
+    {% comment %} skills {% endcomment %}
+
+  <label for="skills" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Skills</label>
+  <select id="skills" name='skills' class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+    <option selected>skill</option>
+    <option value="drowner">drowner</option>
+    <option value="videography">videography</option>
+    <option value="cinimatography">Cinematographer</option>
+  </select>
+
+    <!-- Submit Button -->
+    <div class="text-center pt-2">
+      <button type="submit"
+        class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-6 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+        Add New Cameraman
+      </button>
+    </div>
+
+  </form>
+</div>
+{% endblock content %}
